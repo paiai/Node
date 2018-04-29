@@ -1,3 +1,11 @@
+DS_Store
+node_modules/
 
 finance/node_modules/
 finance/.DS_Store
+
+
+crawl/nodejs.org/
+crawl/img/
+.DS_Store
+.DS_Store
