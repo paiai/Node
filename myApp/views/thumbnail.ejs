@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="uploadImg">
+        <input type="submit">
+    </form>
+
+    <div class="thumbnail-list">
+        <% if(this.files) { %>
+            <% files.forEach(function(file){%>
+            <img src="/thumbnails/<%=file%>">
+            <%});%>
+        <% } %>
+    </div>
+  </body>
+</html>
