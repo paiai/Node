@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">		
+		<title>글 리스트</title>
+        <link href="/stylesheets/semantic.min.css" rel="stylesheet" >
+		
+		<style>
+			* {
+				padding:0;
+				margin:0;
+				box-sizing:border-box;
+			}
+			
+			html {
+				width:100%;
+				height:100%;
+			}
+			
+			body {
+				width:100%;
+				height:100%;
+				color: #000;
+				background-color: #fff;
+			}
+					
+			.container {
+				margin-right: auto;
+				margin-left: auto;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+	
+			span {
+				color: #333;
+			}
+
+			#board_title {
+				font-size:1.2em;
+				font-weight:bold;
+				color:teal;
+			}
+
+		</style>
+		
+		<script src="/javascripts/jquery-3.1.1.min.js"></script>
+		<!-- <script src="/javascripts/semantic.min.js"></script> -->
+		<script>
+			function listpost(page, perPage) {
+				document.location = '/process/listpost?page=' + page + '&perPage=' + perPage;
+			}
+		</script>
+	</head>
+	<body>
+    	
+    	<div class="container">
+    		<br>
+    		
+			<div class="ui raised segment">
+				<a class="ui blue ribbon label">게시판</a>
+      			<span id="board_title">글 목록</span>
+			
+				<div class="ui blue fluid card">
+					 <div class="content">
+						<div class="ui grid">
+			   				<div class="two wide column">번호</div>
+			   				<div class="eight wide column">제목</div>
+			   				<div class="two wide column">작성자</div>
+			   				<div class="two wide column">작성일</div>
+			   				<div class="two wide column">조회수</div>
+			   			</div>
+				    		
+						<div class="ui very relaxed selection celled list">
+							<%  //var noStart = (pageCount - page) * perPage;
+							
+                                for(let data of results) {
+                                var curTitle = data.title;
+                                var curContents = data.contents;
+                                var curWriter = data.userId;
+                                var curNo = data.no;
+                                var curDate = data.createAt;
+                                %>
+								    <div class="item">
+										<div class="ui grid">
+						    				<div class="two wide column"><%=curNo %></div>
+						    				<div class="fourteen wide column" onclick="javascript:window.location='/process/showpost/<%=curNo%>'">
+						    					<div class="ui header">
+										    		<h4 class="ui left aligned header">
+										    			<%=curTitle %>
+										    		</h4>
+											      	<h5 class="ui right aligned orange header">
+                                                              <%=curWriter %>
+                                                              <%=curDate %>
+											      	</h5>
+												</div>
+						    				</div>
+						    			</div>
+						    		</div>
+							<% } %>	
+				    	</div>
+			    	 
+						 	  
+						<br><br>
+						<a class="ui button" href='/process/listpost?page=0&perPage=2'>재요청</a>
+						<a class="ui button" href='/public/addpost.html'>글쓰기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
+

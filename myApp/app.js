@@ -4,10 +4,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// sequelize
+let models = require("./models/index.js");
+models.sequelize.sync().then( () => {
+  console.log(" DB 연결 성공")
+}).catch(err => {
+  console.log("연결 실패")
+  console.log(err)
+})
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 //var dbRouter = require('./routes/db_test'); //// 삭제 필요
-var boardsRouter = require('./routes/boards');
+var boardRouter = require('./routes/board');
 
 var app = express();
 
@@ -24,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //app.use('/db', dbRouter);
-app.use('/boards', boardsRouter);
+app.use('/board', boardRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
